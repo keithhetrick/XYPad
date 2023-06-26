@@ -1,0 +1,45 @@
+/*
+  ==============================================================================
+
+    XyPad.h
+    Created: 25 Jun 2023 9:50:19pm
+    Author:  Keith Hetrick
+
+  ==============================================================================
+*/
+
+#pragma once
+
+#include <JuceHeader.h>
+
+namespace Gui
+{
+    class XyPad : public Component
+    {
+    public:
+        enum class Axis { X, Y };
+        
+        class Thumb : public Component
+        {
+        public:
+            Thumb();
+            void paint(Graphics& g) override;
+        private:
+            JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(Thumb)
+        };
+        
+        XyPad();
+        void resized()          override;
+        void paint(Graphics& g) override;
+        void registerSlider(Slider* slider, Axis axis);
+        void deregisterSlider(Slider* slider);
+        
+    private:
+        std::vector<Slider*> xSliders, ySliders;
+        Thumb thumb;
+        
+        static constexpr int thumbSize = 40;
+        
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(XyPad);
+    };
+}
