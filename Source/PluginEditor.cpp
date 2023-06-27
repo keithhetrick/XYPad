@@ -27,12 +27,17 @@ XYPadAudioProcessorEditor::XYPadAudioProcessorEditor (XYPadAudioProcessor& p) :
     gainLabel.attachToComponent(&gainSlider, false);
     panLabel. attachToComponent(&panSlider, false);
     
+    xyPad.registerSlider(&gainSlider, Gui::XyPad::Axis::Y);
+    xyPad.registerSlider(&panSlider,  Gui::XyPad::Axis::X);
+    
     setSize (500, 300);
     setResizable(true, true);
 }
 
 XYPadAudioProcessorEditor::~XYPadAudioProcessorEditor()
 {
+    xyPad.deregisterSlider(&gainSlider);
+    xyPad.deregisterSlider(&panSlider);
 }
 
 //==============================================================================
