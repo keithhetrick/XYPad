@@ -11,31 +11,26 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "XyPad.h"
+#include "Panel1.h"
+#include "Panel2.h"
 
 //==============================================================================
 /**
 */
-class XYPadAudioProcessorEditor  : public juce::AudioProcessorEditor
+class XyPadAudioProcessorEditor  : public AudioProcessorEditor
 {
 public:
-    XYPadAudioProcessorEditor (XYPadAudioProcessor&);
-    ~XYPadAudioProcessorEditor() override;
+    XyPadAudioProcessorEditor (XYPadAudioProcessor&);
 
-    //==============================================================================
-    void paint (juce::Graphics&) override;
+    void paint (Graphics&) override;
     void resized() override;
-
 private:
-    using SliderAttachment =  AudioProcessorValueTreeState::SliderAttachment;
-    
     XYPadAudioProcessor& audioProcessor;
-    
-    Slider gainSlider{ Slider::SliderStyle::RotaryHorizontalVerticalDrag, Slider::TextBoxBelow };
-    Slider panSlider { Slider::SliderStyle::RotaryHorizontalVerticalDrag, Slider::TextBoxBelow };
-    SliderAttachment gainAttachment, panAttachment;
-    Label gainLabel{ "gainLabel", "Gain" };
-    Label panLabel { "panLabel", "Pan" };
-    Gui::XyPad xyPad;
+    AudioProcessorValueTreeState& parameters;
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (XYPadAudioProcessorEditor)
+    Gui::Panel1 panel1;
+    Gui::Panel2 panel2;
+    TabbedComponent tabbedComponent{ TabbedButtonBar::TabsAtTop };
+    
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (XyPadAudioProcessorEditor)
 };

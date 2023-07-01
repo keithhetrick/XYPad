@@ -4,7 +4,14 @@
               addUsingNamespaceToJuceHeader="1" jucerFormatVersion="1" companyName="Hummingbird Hills LLC">
   <MAINGROUP id="OnnAfZ" name="XYPad">
     <GROUP id="{55BD3456-21DA-6184-92C5-502BB8907393}" name="Source">
+      <GROUP id="{B668AAC0-0DC9-3FE7-98AB-73EE35EEEE0B}" name="Panel">
+        <FILE id="pS63bI" name="Panel1.h" compile="0" resource="0" file="Source/Panel1.h"/>
+        <FILE id="w22Woz" name="Panel2.h" compile="0" resource="0" file="Source/Panel2.h"/>
+        <FILE id="QekLl2" name="Panel3.h" compile="0" resource="0" file="Source/Panel3.h"/>
+      </GROUP>
       <GROUP id="{2F542606-407D-ABA1-90AE-0F743AE05D6A}" name="Component">
+        <FILE id="KfzlHW" name="ConfigurableSlider.h" compile="0" resource="0"
+              file="Source/ConfigurableSlider.h"/>
         <FILE id="YpKpuW" name="XyPad.cpp" compile="1" resource="0" file="Source/XyPad.cpp"/>
         <FILE id="LXkMtw" name="XyPad.h" compile="0" resource="0" file="Source/XyPad.h"/>
       </GROUP>

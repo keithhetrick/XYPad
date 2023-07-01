@@ -148,7 +148,7 @@ bool XYPadAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* XYPadAudioProcessor::createEditor()
 {
-    return new XYPadAudioProcessorEditor (*this);
+    return new XyPadAudioProcessorEditor (*this);
 }
 
 //==============================================================================

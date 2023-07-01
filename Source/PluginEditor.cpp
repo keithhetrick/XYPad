@@ -10,48 +10,29 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-XYPadAudioProcessorEditor::XYPadAudioProcessorEditor (XYPadAudioProcessor& p) :
+XyPadAudioProcessorEditor::XyPadAudioProcessorEditor (XYPadAudioProcessor& p) :
     AudioProcessorEditor (&p),
     audioProcessor (p),
-    gainAttachment(p.getApvts(), "gain", gainSlider),
-    panAttachment (p.getApvts(), "pan", panSlider)
+    parameters(p.getApvts()),
+    panel1(parameters),
+    panel2(parameters)
 {
-    addAndMakeVisible(gainSlider);
-    addAndMakeVisible(panSlider);
-    addAndMakeVisible(gainLabel);
-    addAndMakeVisible(panLabel);
-    addAndMakeVisible(xyPad);
-    
-    gainLabel.setJustificationType(Justification::centred);
-    panLabel. setJustificationType(Justification::centred);
-    gainLabel.attachToComponent(&gainSlider, false);
-    panLabel. attachToComponent(&panSlider, false);
-    
-    xyPad.registerSlider(&gainSlider, Gui::XyPad::Axis::Y);
-    xyPad.registerSlider(&panSlider,  Gui::XyPad::Axis::X);
-    
-    setSize (500, 300);
+    addAndMakeVisible(tabbedComponent);
+    tabbedComponent.addTab("Single Slider", Colours::transparentBlack, &panel1, false);
+    tabbedComponent.addTab("Multiple Configurable Sliders", Colours::transparentBlack, &panel2, false);
+
+    setSize (800, 400);
     setResizable(true, true);
 }
 
-XYPadAudioProcessorEditor::~XYPadAudioProcessorEditor()
-{
-    xyPad.deregisterSlider(&gainSlider);
-    xyPad.deregisterSlider(&panSlider);
-}
-
 //==============================================================================
-void XYPadAudioProcessorEditor::paint (juce::Graphics& g)
+void XyPadAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
+    g.setGradientFill(ColourGradient{ Colours::darkgrey.brighter(0.2f), getLocalBounds().toFloat().getCentre(), Colours::darkgrey.darker(0.8f), {}, true });
+    g.fillRect(getLocalBounds());
 }
 
-void XYPadAudioProcessorEditor::resized()
+void XyPadAudioProcessorEditor::resized()
 {
-    const auto container = getLocalBounds().reduced(20);
-    auto bounds = container;
-    gainSlider.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.25f)));
-    xyPad.setBounds(bounds.removeFromLeft(container.proportionOfWidth(0.5f)).reduced(20));
-    panSlider.setBounds(bounds);
+    tabbedComponent.setBounds(getLocalBounds());
 }
